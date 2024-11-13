@@ -1,0 +1,8 @@
+name: my_mlflow_project
+
+conda_env: conda.yaml  # Point to a Conda environment if you have one
+
+entry_points:
+  main:
+    parameters:
+    command: "python src/app.py"
