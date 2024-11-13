@@ -1,13 +1,10 @@
 import pandas as pd
 import numpy as np
-from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import StandardScaler
-from sklearn.decomposition import PCA
 from sklearn.mixture import GaussianMixture
-from mypackage.myclass import LoadData
-from mypackage.dataprep import DataPrep
 import mlflow
 import mlflow.sklearn
+from mypackage.myclass import LoadData
+from mypackage.dataprep import DataPrep
 
 # Set up MLflow tracking URI and experiment
 mlflow.set_tracking_uri("http://localhost:5000")
@@ -38,15 +35,12 @@ def processing(df):
     anomalies = df[densities < density_threshold]
     anomalies = pd.DataFrame(anomalies)
     
-    # Log the anomalies as an artifact (CSV file)
+    # Save and log the anomalies as an artifact (CSV file)
     anomalies.to_csv('inpatient_anomalies.csv', index=False)
     mlflow.log_artifact('inpatient_anomalies.csv')
 
     # Log the model
     mlflow.sklearn.log_model(gmm, "gmm_model")  # Logs the GMM model to MLflow
-
-    # Optionally, register the model (if needed for deployment or later use)
-    # mlflow.register_model('runs:/<run_id>/gmm_model', 'inpatient_anomalies')
 
 if __name__ == "__main__":
     # Start an MLflow run

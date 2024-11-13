@@ -1,8 +1,7 @@
 name: claims-fraud-detection
 
-conda_env: conda.yaml
+python_env: python_env.yaml
 
 entry_points:
   main:
-    parameters:
     command: "python src/train.py"
