@@ -1,1 +1,1 @@
-# Claims-Fraud-Detection
+# ClaimGuard: Detecting Anomalies in Insurance Claims
